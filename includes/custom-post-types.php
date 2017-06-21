@@ -84,10 +84,10 @@ function create_review_category(){
     'show_tagcloud'         => true, // равен аргументу show_ui
     'show_in_rest'          => null, // добавить в REST API
     'rest_base'             => null, // $taxonomy
-    'hierarchical'          => false,
+    'hierarchical'          => true,
     'update_count_callback' => '',
     'rewrite'               => true,
-    //'query_var'             => $taxonomy, // название параметра запроса
+    'query_var'             => true, // название параметра запроса
     'capabilities'          => array(),
     'meta_box_cb'           => null, // callback функция. Отвечает за html код метабокса (с версии 3.8): post_categories_meta_box или post_tags_meta_box. Если указать false, то метабокс будет отключен вообще
     'show_admin_column'     => false, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)

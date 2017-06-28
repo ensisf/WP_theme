@@ -13,7 +13,6 @@ else: echo '<p>Нет записей.</p>'; endif; ?>
 <!-- // WP_Query-->
 <?php
 	 $args = array(
-			'paged'=>true,
 			'post_type' => 'projects',
 			'posts_per_page'=> -1
 	);

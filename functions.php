@@ -20,7 +20,7 @@ function theme_scripts() {
 add_action( 'wp_enqueue_scripts', 'theme_scripts' );
 
 // custom post type
-require_once( trailingslashit( get_stylesheet_directory() ) . 'includes/custom-post-types.php' );
+// require_once( trailingslashit( get_stylesheet_directory() ) . 'includes/custom-post-types.php' );
 
 //тег title в head сайту
 add_theme_support('title-tag');

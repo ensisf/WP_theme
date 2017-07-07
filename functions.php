@@ -76,6 +76,23 @@ add_filter('excerpt_more', function($more) {
     return '...';
 });
 
+
+//disable emogies
+function disable_wp_emojicons() {
+  // all actions related to emojis
+  remove_action( 'admin_print_styles', 'print_emoji_styles' );
+  remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+  remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+  remove_action( 'wp_print_styles', 'print_emoji_styles' );
+  remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+  remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+  remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+
+  // filter to remove TinyMCE emojis
+  add_filter( 'tiny_mce_plugins', 'disable_emojicons_tinymce' );
+}
+add_action( 'init', 'disable_wp_emojicons' );
+
 ///////////////////////////////////// Руссифицирует месяца и недели в дате  /////////////////////////////////////
 
 /**
@@ -126,23 +143,22 @@ function wp_corenavi() {
   if ($max > 1) echo '</div>';
 }
 
-/////////////////////////////додає категорії для сторінок ///////////////////////////////////////////
+/////////////////////////////add categories for pages ///////////////////////////////////////////
 
 
-function true_apply_categories_for_pages(){
-  add_meta_box( 'categorydiv', 'Категории', 'post_categories_meta_box', 'page', 'side', 'normal'); // добавляем метабокс категорий для страниц
-  register_taxonomy_for_object_type('category', 'page'); // регистрируем рубрики для страниц
-}
-// обязательно вешаем на admin_init
-add_action('admin_init','true_apply_categories_for_pages');
+// function true_apply_categories_for_pages(){
+//   add_meta_box( 'categorydiv', 'Категории', 'post_categories_meta_box', 'page', 'side', 'normal'); // добавляем метабокс категорий для страниц
+//   register_taxonomy_for_object_type('category', 'page'); // регистрируем рубрики для страниц
+// }
+// // обязательно вешаем на admin_init
+// add_action('admin_init','true_apply_categories_for_pages');
 
-function true_expanded_request_category($q) {
-  if (isset($q['category_name'])) // если в запросе присутствует параметр рубрики
-    $q['post_type'] = array('post', 'page'); // то, помимо записей, выводим также и страницы
-  return $q;
-}
+// function true_expanded_request_category($q) {
+//   if (isset($q['category_name'])) // если в запросе присутствует параметр рубрики
+//     $q['post_type'] = array('post', 'page'); // то, помимо записей, выводим также и страницы
+//   return $q;
+// }
 
-add_filter('request', 'true_expanded_request_category');
+// add_filter('request', 'true_expanded_request_category');
 
 
-?>

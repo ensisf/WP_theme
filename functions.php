@@ -15,6 +15,14 @@ function theme_scripts() {
 
     wp_register_script( 'main_script', get_stylesheet_directory_uri() . '/js/main.min.js', array('jquery'), true, true );
     wp_enqueue_script( 'main_script' );
+
+    // additional data (for example ajax url)
+    wp_localize_script('main_script', 'themeData',
+        array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'path' => get_template_directory_uri()
+        )
+    );
 }
 
 add_action( 'wp_enqueue_scripts', 'theme_scripts' );
